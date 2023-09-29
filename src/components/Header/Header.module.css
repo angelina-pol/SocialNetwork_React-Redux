@@ -1,0 +1,30 @@
+.header {
+  grid-area: h;
+  background-color: rosybrown;
+  display: flex;
+  justify-content: space-between;
+}
+
+.name {
+  display: flex;
+}
+
+.name img {
+  border-radius: 60px;
+  height: 60px;
+}
+
+.title {
+  display: flex;
+  margin-left: 10px;
+}
+
+.centerText {
+  display: flex;
+  margin: auto;
+}
+
+.loginBlock {
+  display: flex;
+  margin-right: 20px;
+}
