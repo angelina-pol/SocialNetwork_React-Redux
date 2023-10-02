@@ -23,6 +23,7 @@ const App = function (props) {
             <Route path='/music/*' element={<Music/>} />
             <Route path='/users/*' element={<UsersContainer/>} />
             <Route path='/settings/*' element={<Settings/>} />
+            <Route path='/login/*' element={<Login/>} />
           </Routes>
         </div>
       </div>

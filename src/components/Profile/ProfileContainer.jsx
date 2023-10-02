@@ -1,9 +1,9 @@
-import React, {useEffect} from 'react';
-import Profile from './Profile';
-import axios  from 'axios';
-import {connect} from 'react-redux';
-import { setUserProfile } from '../../redux/profilePageReducer';
-import {useParams} from 'react-router-dom'
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { getUserProfile } from '../../redux/profilePageReducer';
+import { useParams } from 'react-router-dom'
+
+import Profile from '../Profile/Profile'
 
 function ProfileContainer(props) {
     let {userId} = useParams();
@@ -11,13 +11,7 @@ function ProfileContainer(props) {
         userId = 2;
     }
 
-    useEffect(() => {
-        axios
-            .get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
-            .then(response => {
-                props.setUserProfile(response.data)
-            })
-    }, [userId])
+props.getUserProfile(userId)
 
     return (
         <div>
@@ -30,6 +24,4 @@ let mapStateToProps = (state) => ({
     profile: state.profilePage.profile,
 })
 
-export default connect(mapStateToProps, {
-    setUserProfile,
-})(ProfileContainer);
+export default connect(mapStateToProps, {getUserProfile,})(ProfileContainer);
