@@ -1,8 +1,13 @@
 import React from 'react';
+import { Navigate } from 'react-router-dom';
 
 const NewMessage = (props) => {
 
     let refInputMessage = React.createRef();
+
+    if (!props.isAuth) {
+      return <Navigate to={'/login/'}></Navigate>
+    }
 
     let addMessage = () => {
       props.onAddMessage();
