@@ -2,11 +2,11 @@ import React from 'react';
 import { addMessageActionCreator, inputMessageActionCreator, removeTextActionCreator } from '../../../redux/dialogsPageReducer';
 import NewMessage from './NewMessage';
 import { connect } from 'react-redux';
+import { withAuthNavigate } from '../../../hoc/withAuthNavigate';
 
 let mapStateToProps = (state) => {
   return {
     newMessage: state.dialogsPage.newMessage,
-    isAuth: state.auth.isAuth,
   }
 }
 
@@ -24,6 +24,8 @@ let mapDispatchToProps = (dispatch) => {
   }
 }
 
-const NewMessageContainer = connect(mapStateToProps, mapDispatchToProps)(NewMessage);
+let authNavigateComponent = withAuthNavigate(NewMessage);
+
+const NewMessageContainer = connect(mapStateToProps, mapDispatchToProps)(authNavigateComponent);
 
 export default NewMessageContainer;
