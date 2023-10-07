@@ -3,7 +3,7 @@ import classes from './Login.module.css'
 
 const Login = (props) => {
     return (
-        <div class={classes.content}>
+        <div className={classes.content}>
             Login
         </div>
     )
