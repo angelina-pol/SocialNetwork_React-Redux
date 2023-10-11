@@ -23,10 +23,10 @@ const usersReducer = (state = initialState, action) => {
     switch (action.type) {
         case FOLLOW:
             return {
-                ...state, 
+                ...state,
                 users: state.users.map(u => {
                     if (u.id === action.userId) {
-                        return {...u, followed: true}
+                        return { ...u, followed: true }
                     }
                     return u
                 })
@@ -34,10 +34,10 @@ const usersReducer = (state = initialState, action) => {
 
         case UNFOLLOW:
             return {
-                ...state, 
+                ...state,
                 users: state.users.map(u => {
                     if (u.id === action.userId) {
-                        return {...u, followed: false}
+                        return { ...u, followed: false }
                     }
                     return u
                 })
@@ -65,13 +65,13 @@ const usersReducer = (state = initialState, action) => {
         case TOGGLE_IS_FOLLOWING_PROGRESS:
             return {
                 ...state,
-                followingInProgress: action.isFetching 
-                    ? [...state.followingInProgress, action.userId] 
+                followingInProgress: action.isFetching
+                    ? [...state.followingInProgress, action.userId]
                     : [state.followingInProgress.filter(id => id != action.userId)],
             }
         default:
-            return state;    
-    } 
+            return state;
+    }
 }
 
 export const followSuccess = (userId) => ({
@@ -113,37 +113,37 @@ export const toggleIsFollowingProgress = (isFetching, userId) => ({
 export const getUsers = (currentPage, pageSize) => {
     return (dispatch) => {
         dispatch(toggleIsFetching(true));
-    
+
         usersAPI.getUsers(currentPage, pageSize)
             .then(data => {
                 dispatch(toggleIsFetching(false));
                 dispatch(setUsers(data.items));
                 dispatch(setTotalUsersCount(data.totalCount));
-        })
+        });
     }
-} 
+}
 
-export const unfollow = (userId) => {
-    dispatch(toggleIsFollowingProgress(true,userId));
-    usersAPI.unfollowRequest(userId)
-    .then(data => {
-        if (data.resultCode == 0) {
-            dispatch(unfollowSuccess(userId))
-        }
+export const unfollow = (userId) => (dispatch) => {
     dispatch(toggleIsFollowingProgress(true, userId));
-    dispatch(toggleIsFollowingProgress(false, userId));
-    })
-} 
+    usersAPI.unfollowRequest(userId)
+        .then(data => {
+            if (data.resultCode == 0) {
+                dispatch(unfollowSuccess(userId))
+            }
+            dispatch(toggleIsFollowingProgress(true, userId));
+            dispatch(toggleIsFollowingProgress(false, userId));
+        });
+};
 
-export const follow = (userId) => {
+export const follow = (userId) => (dispatch) => {
     dispatch(toggleIsFollowingProgress(true, userId));
     usersAPI.followRequest(userId)
-    .then(data => {
-        if (data.resultCode == 0) {
-            dispatch(follow(userId))
-        }
-    dispatch(toggleIsFollowingProgress(false, userId));
-    })
-}
+        .then(data => {
+            if (data.resultCode == 0) {
+                dispatch(follow(userId))
+            }
+            dispatch(toggleIsFollowingProgress(false, userId));
+        });
+};
 
 export default usersReducer;
