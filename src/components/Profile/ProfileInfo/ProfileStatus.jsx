@@ -5,21 +5,31 @@ import { useState } from "react";
 const ProfileStatus = (props) => {
 
     const [moodEdit, setMoodEdit] = useState(false);
+    const [stat, setStat] = useState(props.status);
 
     const editStatus = () => {
         setMoodEdit(!moodEdit)
     };
+
+    let onStatusChange = (e) => {
+        setStat(e.currentTarget.value)
+        props.updateStatus(e.currentTarget.value)
+    }
+
+    const activateEditStatus = () => {
+        setMoodEdit(false)
+    }
 
     return (
         <div>
             {moodEdit 
             ? 
                 <div>
-                    <input autoFocus onBlur={editStatus} value={'hello world'} />
+                    <input onChange={onStatusChange} autoFocus onBlur={activateEditStatus} value={stat} />
                 </div>
             :
                 <div>
-                    <span onDoubleClick={editStatus}>ProfileStatus</span>
+                    <span onDoubleClick={editStatus}>{props.status || 'New Status'}</span>
                 </div>
             }
         </div>

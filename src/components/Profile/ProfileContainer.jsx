@@ -9,7 +9,7 @@ import { compose } from 'redux';
 function ProfileContainer(props) {
     let {userId} = useParams();
     if (!userId) {
-        userId = 2;
+        userId = 30054;
     }
 
     useEffect(() => {
