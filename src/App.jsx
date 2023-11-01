@@ -9,10 +9,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import Login from './components/Login/Login';
+import store from './redux/redux-store';
+import { Provider } from 'react-redux';
 
 const App = function (props) {
   return (
     <BrowserRouter>
+    <Provider store={store}>
       <div className='app-wrapper'>
         <HeaderContainer />
         <Navbar />
@@ -28,6 +31,7 @@ const App = function (props) {
           </Routes>
         </div>
       </div>
+      </Provider>
     </BrowserRouter>
   );
 }
