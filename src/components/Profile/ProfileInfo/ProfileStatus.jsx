@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from './ProfileInfo.module.css';
-import { useState } from "react";
 
 const ProfileStatus = (props) => {
 
