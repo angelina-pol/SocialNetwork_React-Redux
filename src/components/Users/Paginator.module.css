@@ -1,3 +1,13 @@
 .selectedPage {
     font-weight: bold;
 }
+
+.pageNumber {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+
+.paginator {
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
