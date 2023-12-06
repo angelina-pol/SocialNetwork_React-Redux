@@ -28,7 +28,7 @@ const ProfileStatus = (props) => {
                 </div>
             :
                 <div>
-                    <span onDoubleClick={editStatus}>{props.status || 'New Status'}</span>
+                    <b>Status: </b><span onDoubleClick={editStatus}>{props.status || 'New Status'}</span>
                 </div>
             }
         </div>
